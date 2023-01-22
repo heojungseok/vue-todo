@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Header</h1>
+    <i class="fas fa-camera fa-2x"></i>
   </div>
 </template>
 
@@ -9,4 +10,9 @@ export default {};
 </script>
 
 <style scoped>
+h1{
+  color: #2F3B52;
+  font-weight: 900;
+  margin: 2.5rem 0 1.5rem;
+}
 </style>
