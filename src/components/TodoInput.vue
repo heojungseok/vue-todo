@@ -18,7 +18,7 @@ export default {
     addTodo() {
       console.log(this.newTodoItem);
       // 저장하는 로직
-      localStorage.setItem('temp', this.newTodoItem);
+      localStorage.setItem(this.newTodoItem, this.newTodoItem);
       // 인풋 초기화
       this.clearInput();
     },

@@ -25,6 +25,7 @@ export default {
 </script>
 
 <style>
+/* scope 설정 안해놔서  하위 컴포넌트에 적용 됨*/
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
