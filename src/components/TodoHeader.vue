@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Header</h1>
-    <i class="fas fa-camera fa-2x"></i>
+    <h1>TODO it!!!!!!!!!!</h1>
   </div>
 </template>
 
