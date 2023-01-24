@@ -1,8 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todo, index) in todoItems" v-bind:key="todo" class="shadow">
-        {{ todo }}
+      <li v-for="(todo, index) in todoItems" v-bind:key="todo.item" class="shadow">
+        <i class="fas fa-solid fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }" @click="toggleComplete(todo, index)"></i>
+        <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
         <span class="removeBtn" @click="removeTodo(todo, index)">
           <i class="fas fa-trash-alt"></i>
         </span>
@@ -26,7 +27,9 @@ export default {
     initData() {
       for (let index = 0; index < localStorage.length; index++) {
         if (localStorage.key(index) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(localStorage.key(index));
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(index)))
+          );
         }
       }
     },
@@ -34,6 +37,12 @@ export default {
       localStorage.removeItem(todo);
       this.todoItems.splice(index, 1);
       // slice() 베열 변경 없음
+    },
+    toggleComplete(todo) {
+      todo.completed = !todo.completed;
+      // localStorage update
+      localStorage.removeItem(todo.item);
+      localStorage.setItem(todo.item, JSON.stringify(todo))
     },
   },
 };
