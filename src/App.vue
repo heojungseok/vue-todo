@@ -2,26 +2,36 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoList :zero="clearTodos"></TodoList>
+    <TodoFooter @clearTodo="clearTodo"></TodoFooter>
   </div>
 </template>
 
 <script>
-import TodoHeader from './components/TodoHeader.vue'
-import TodoInput from './components/TodoInput.vue'
-import TodoList from './components/TodoList.vue'
-import TodoFooter from './components/TodoFooter.vue'
+import TodoHeader from "./components/TodoHeader.vue";
+import TodoInput from "./components/TodoInput.vue";
+import TodoList from "./components/TodoList.vue";
+import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    'TodoHeader' : TodoHeader,
-    'TodoInput' : TodoInput,
-    'TodoList' : TodoList,
-    'TodoFooter' : TodoFooter,
-  }
-}
+    TodoHeader: TodoHeader,
+    TodoInput: TodoInput,
+    TodoList: TodoList,
+    TodoFooter: TodoFooter,
+  },
+  data() {
+    return {
+      clearTodos: [],
+    }
+  },
+  methods: {
+    clearTodo(obj) {
+      this.clearTodos = obj;
+    },
+  },
+};
 </script>
 
 <style>
@@ -37,7 +47,7 @@ export default {
 
 body {
   text-align: center;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
 }
 
 input {

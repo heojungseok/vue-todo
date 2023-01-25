@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  props: ['zero'],
   data() {
     return {
       todoItems: [],
@@ -22,6 +23,13 @@ export default {
   // 라이프 사이클 중 인스턴스가 생성되자마자 호출 되는 훅
   created() {
     this.initData();
+  },
+  watch: {
+    zero(obj) {
+      if(obj.length === 0){
+        this.todoItems = obj;
+      }
+    }
   },
   methods: {
     initData() {
