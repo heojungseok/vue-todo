@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todo, index) in todoItems" v-bind:key="todo.item" class="shadow">
+      <li v-for="(todo, index) in items" v-bind:key="todo.item" class="shadow">
         <i class="fas fa-solid fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }" @click="toggleComplete(todo, index)"></i>
         <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
         <span class="removeBtn" @click="removeTodo(todo, index)">
@@ -14,43 +14,22 @@
 
 <script>
 export default {
-  props: ['zero'],
-  data() {
-    return {
-      todoItems: [],
-    };
-  },
-  // 라이프 사이클 중 인스턴스가 생성되자마자 호출 되는 훅
-  created() {
-    this.initData();
-  },
+  props: ['items'],
   watch: {
-    zero(obj) {
+    item(obj) {
       if(obj.length === 0){
         this.todoItems = obj;
       }
     }
   },
   methods: {
-    initData() {
-      for (let index = 0; index < localStorage.length; index++) {
-        if (localStorage.key(index) !== "loglevel:webpack-dev-server") {
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(index)))
-          );
-        }
-      }
-    },
     removeTodo(todo, index) {
+      this.$emit('removeTodo', index);
       localStorage.removeItem(todo);
-      this.todoItems.splice(index, 1);
       // slice() 베열 변경 없음
     },
     toggleComplete(todo) {
-      todo.completed = !todo.completed;
-      // localStorage update
-      localStorage.removeItem(todo.item);
-      localStorage.setItem(todo.item, JSON.stringify(todo))
+      this.$emit('toggleComplete', todo);
     },
   },
 };

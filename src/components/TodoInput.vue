@@ -18,8 +18,7 @@ export default {
     addTodo() {
       if (this.newTodoItem !== "") {
         let obj = { completed: false, item: this.newTodoItem };
-        // 저장하는 로직
-        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.$emit('addTodo', obj);
         // 인풋 초기화
         this.clearInput();
       }

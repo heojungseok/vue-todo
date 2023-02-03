@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList :zero="clearTodos"></TodoList>
-    <TodoFooter @clearTodo="clearTodo"></TodoFooter>
+    <TodoInput v-on:addTodo="addOneItem"></TodoInput>
+    <TodoList :items="todoItems" 
+              v-on:removeTodo="removeTodo" 
+              v-on:toggleComplete="toggleComplete"></TodoList>
+    <TodoFooter v-on:clearTodo="clearTodo"></TodoFooter>
   </div>
 </template>
 
@@ -15,20 +17,47 @@ import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
   name: "App",
+  // 라이프 사이클 중 인스턴스가 생성되자마자 호출 되는 훅
+  created() {
+    this.initData();
+  },
   components: {
-    TodoHeader: TodoHeader,
-    TodoInput: TodoInput,
-    TodoList: TodoList,
-    TodoFooter: TodoFooter,
+    'TodoHeader': TodoHeader,
+    'TodoInput': TodoInput,
+    'TodoList': TodoList,
+    'TodoFooter': TodoFooter,
   },
   data() {
     return {
-      clearTodos: [],
+      todoItems: [],
     }
   },
   methods: {
+    initData() {
+      for (let index = 0; index < localStorage.length; index++) {
+        if (localStorage.key(index) !== "loglevel:webpack-dev-server") {
+          this.todoItems.push(
+            JSON.parse(localStorage.getItem(localStorage.key(index)))
+          );
+        }
+      }
+    },
+    addOneItem(obj) {
+        // 저장하는 로직
+        localStorage.setItem(obj.item, JSON.stringify(obj));
+        this.todoItems.push(obj);
+    },
+    removeTodo(index) {
+        this.todoItems.splice(index, 1);
+    },
+    toggleComplete(todo) {
+      todo.completed = !todo.completed;
+      // localStorage update
+      localStorage.removeItem(todo.item);
+      localStorage.setItem(todo.item, JSON.stringify(todo))
+    },
     clearTodo(obj) {
-      this.clearTodos = obj;
+      this.todoItems = obj;
     },
   },
 };
