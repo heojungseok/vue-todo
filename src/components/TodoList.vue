@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- vue transition site
+       https://v2.vuejs.org/v2/guide/transitions.html#Transition-Classes 
+       -->
     <transition-group name="list" tag="ul">
       <li v-for="(todo, index) in items" v-bind:key="todo.item" class="shadow">
         <i class="fas fa-solid fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }" @click="toggleComplete(todo, index)"></i>
@@ -72,7 +75,7 @@ li {
 .list-enter-active, .list-leave-active {
   transition: all 1s;
 }
-.list-enter, .list-leave-to {
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
 }
