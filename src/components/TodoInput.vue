@@ -1,18 +1,21 @@
 <template>
   <div class="inputBox shadow">
-    <input v-model="newTodoItem" @keyup.enter="addTodo" type="text" placeholder="input here !!!!"/>
+    <input v-model="newTodoItem" @keyup.enter="addTodo" type="text" placeholder="할 일을 입력해주세요."/>
     <span class="addContainer" @click="addTodo">
       <i class="fas fa-plus-circle addBtn"></i>
     </span>
 
-    <button id="show-modal" @click="showModal = true">Show Modal</button>
-    <!-- use the modal component, pass in the prop -->
-    <ToDoModal v-if="showModal" @close="showModal = false">
-      <!--
-      you can use custom content here to overwrite
-      default content
+    <ToDoModal v-if="showModal">
+      <!-- you can use custom content here to overwrite default content -->
+    <!-- 
+      slot: 뷰에서 유용하게 쓰이는 기능, 
+        특정 컴포넌트의 일부 UI를 재사용 할 수 있는 기능 
     -->
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header">경고! 
+        <i class="closeModalBtn fas fa-times" @click="showModal = false"></i>
+      </h3>
+      <div slot="body">빈 칸 입니다. 내용 입력해주세요.</div> 
+      <div slot="footer"></div>
     </ToDoModal>
   </div>
 </template>
@@ -37,6 +40,8 @@ export default {
         this.$emit("addTodo", obj);
         // 인풋 초기화
         this.clearInput();
+      } else {
+        this.showModal =  !this.showModal;
       }
     },
     clearInput() {
@@ -70,5 +75,8 @@ input:focus {
 .addBtn {
   color: white;
   vertical-align: middle;
+}
+.closeModalBtn {
+  color: #42b983;
 }
 </style>
