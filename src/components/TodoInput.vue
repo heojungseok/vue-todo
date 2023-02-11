@@ -4,21 +4,37 @@
     <span class="addContainer" @click="addTodo">
       <i class="fas fa-plus-circle addBtn"></i>
     </span>
+
+    <button id="show-modal" @click="showModal = true">Show Modal</button>
+    <!-- use the modal component, pass in the prop -->
+    <ToDoModal v-if="showModal" @close="showModal = false">
+      <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+      <h3 slot="header">custom header</h3>
+    </ToDoModal>
   </div>
 </template>
 
 <script>
+import ToDoModal from "./common/ToDoModal.vue";
+
 export default {
+  components: {
+    'ToDoModal': ToDoModal,
+  },
   data() {
     return {
       newTodoItem: "",
+      showModal: false,
     };
   },
   methods: {
     addTodo() {
       if (this.newTodoItem !== "") {
         let obj = { completed: false, item: this.newTodoItem };
-        this.$emit('addTodo', obj);
+        this.$emit("addTodo", obj);
         // 인풋 초기화
         this.clearInput();
       }
