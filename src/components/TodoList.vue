@@ -24,12 +24,11 @@ export default {
   },
   methods: {
     removeTodo(todo, index) {
-      this.$emit('removeTodo', index);
-      localStorage.removeItem(todo);
+      this.$emit('removeTodo', todo, index);
       // slice() 베열 변경 없음
     },
-    toggleComplete(todo) {
-      this.$emit('toggleComplete', todo);
+    toggleComplete(todo, index) {
+      this.$emit('toggleComplete', todo, index);
     },
   },
 };

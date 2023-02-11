@@ -2,9 +2,11 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:addTodo="addOneItem"></TodoInput>
-    <TodoList :items="todoItems" 
-              v-on:removeTodo="removeTodo" 
-              v-on:toggleComplete="toggleComplete"></TodoList>
+    <TodoList
+      :items="todoItems"
+      v-on:removeTodo="removeTodo"
+      v-on:toggleComplete="toggleComplete"
+    ></TodoList>
     <TodoFooter v-on:clearTodo="clearTodo"></TodoFooter>
   </div>
 </template>
@@ -22,15 +24,15 @@ export default {
     this.initData();
   },
   components: {
-    'TodoHeader': TodoHeader,
-    'TodoInput': TodoInput,
-    'TodoList': TodoList,
-    'TodoFooter': TodoFooter,
+    TodoHeader: TodoHeader,
+    TodoInput: TodoInput,
+    TodoList: TodoList,
+    TodoFooter: TodoFooter,
   },
   data() {
     return {
       todoItems: [],
-    }
+    };
   },
   methods: {
     initData() {
@@ -43,18 +45,20 @@ export default {
       }
     },
     addOneItem(obj) {
-        // 저장하는 로직
-        localStorage.setItem(obj.item, JSON.stringify(obj));
-        this.todoItems.push(obj);
+      // 저장하는 로직
+      localStorage.setItem(obj.item, JSON.stringify(obj));
+      this.todoItems.push(obj);
     },
-    removeTodo(index) {
-        this.todoItems.splice(index, 1);
+    removeTodo(todo, index) {
+      localStorage.removeItem(todo.item);
+      this.todoItems.splice(index, 1);
     },
-    toggleComplete(todo) {
-      todo.completed = !todo.completed;
+    toggleComplete(todo, index) {
+      // todo.completed = !todo.completed; 
+      this.todoItems[index].completed = !this.todoItems[index].completed
       // localStorage update
       localStorage.removeItem(todo.item);
-      localStorage.setItem(todo.item, JSON.stringify(todo))
+      localStorage.setItem(todo.item, JSON.stringify(todo));
     },
     clearTodo(obj) {
       this.todoItems = obj;
