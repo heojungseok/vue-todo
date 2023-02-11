@@ -61,6 +61,7 @@ export default {
       localStorage.setItem(todo.item, JSON.stringify(todo));
     },
     clearTodo(obj) {
+      localStorage.clear();
       this.todoItems = obj;
     },
   },

@@ -11,7 +11,6 @@
 export default {
   methods: {
     clearTodo() {
-      localStorage.clear();
       this.$emit('clearTodo', []);
       // TodoListVue.data().todoItems = [];
     }
