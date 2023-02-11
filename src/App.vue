@@ -12,6 +12,9 @@
 </template>
 
 <script>
+/* 
+  UI 로 표시가 되는 프레젠테이셔널 컴포넌트 
+*/
 import TodoHeader from "./components/TodoHeader.vue";
 import TodoInput from "./components/TodoInput.vue";
 import TodoList from "./components/TodoList.vue";
@@ -45,7 +48,6 @@ export default {
       }
     },
     addOneItem(obj) {
-      // 저장하는 로직
       localStorage.setItem(obj.item, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
@@ -54,9 +56,7 @@ export default {
       this.todoItems.splice(index, 1);
     },
     toggleComplete(todo, index) {
-      // todo.completed = !todo.completed; 
       this.todoItems[index].completed = !this.todoItems[index].completed
-      // localStorage update
       localStorage.removeItem(todo.item);
       localStorage.setItem(todo.item, JSON.stringify(todo));
     },
