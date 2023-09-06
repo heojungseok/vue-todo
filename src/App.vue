@@ -15,10 +15,10 @@
 /* 
   UI 로 표시가 되는 프레젠테이셔널 컴포넌트 
 */
-import TodoHeader from "./components/TodoHeader.vue";
-import TodoInput from "./components/TodoInput.vue";
-import TodoList from "./components/TodoList.vue";
-import TodoFooter from "./components/TodoFooter.vue";
+import TodoHeader from "./components/common/TodoHeader.vue";
+import TodoInput from "./components/common/TodoInput.vue";
+import TodoList from "./components/common/TodoList.vue";
+import TodoFooter from "./components/common/TodoFooter.vue";
 
 export default {
   name: "App",
