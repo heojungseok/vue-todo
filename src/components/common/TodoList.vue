@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todo, index) in items" v-bind:key="todo.item" class="shadow">
+      <li v-for="(todo, index) in this.$store.state.todoItems" v-bind:key="todo.item" class="shadow">
         <i class="fas fa-solid fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }" @click="toggleComplete(todo, index)"></i>
         <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
         <span class="removeBtn" @click="removeTodo(todo, index)">
