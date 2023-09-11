@@ -24,11 +24,12 @@ export default {
   },
   methods: {
     removeTodo(todo, index) {
-      this.$emit('removeTodo', todo, index);
-      // slice() 베열 변경 없음
+      // this.$emit('removeTodo', todo, index);
+      this.$store.commit('removeTodo', {item: todo, idx: index});
     },
     toggleComplete(todo, index) {
-      this.$emit('toggleComplete', todo, index);
+      // this.$emit('toggleComplete', todo, index);
+      this.$store.commit('toggleComplete', {todo, index});
     },
   },
 };

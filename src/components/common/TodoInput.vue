@@ -18,7 +18,8 @@ export default {
     addTodo() {
       if (this.newTodoItem !== "") {
         let obj = { completed: false, item: this.newTodoItem };
-        this.$emit('addTodo', obj);
+        this.$store.commit('addOneItem', obj);
+        // this.$emit('addTodo', obj); // mutaion 사용으로 주석
         // 인풋 초기화
         this.clearInput();
       }

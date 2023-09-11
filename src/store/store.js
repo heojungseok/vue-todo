@@ -34,9 +34,30 @@ export const store = new Vuex.Store({
             return state.num * 2;
         }
     },
+    // state 값을 변경할 수 있는 유일항 방법 - 메소드
+    // commit() 으로 동작 시킴 => 인자도 같이 넘길 수 있음
     mutations: {
+      addOneItem(state, obj) {
+        localStorage.setItem(obj.item, JSON.stringify(obj));
+        state.todoItems.push(obj);
+      },
+      removeTodo(state, todo) {
+        localStorage.removeItem(todo.item.item);
+        state.todoItems.splice(todo.idx, 1);
+      },
+      toggleComplete(state, todo) {
+        
+        state.todoItems[todo.index].completed = !state.todoItems[todo.index].completed
+        localStorage.removeItem(todo.todo.item);
+        localStorage.setItem(todo.todo.item, JSON.stringify(todo.todo));
 
+      },
+      clearTodo(state, obj) {
+        localStorage.clear();
+        state.todoItems = obj;
+      },
     },
+    
     actions: {
 
     }
